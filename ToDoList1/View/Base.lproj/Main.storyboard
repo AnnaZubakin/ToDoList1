@@ -49,6 +49,9 @@
                     <navigationItem key="navigationItem" title="ToDo" id="LC2-fY-xej">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="trash" catalog="system" id="8zV-dX-ia5">
                             <color key="tintColor" systemColor="labelColor"/>
+                            <connections>
+                                <action selector="deleteAllButtonTapped:" destination="MvC-dL-6c3" id="Qd4-5I-hyu"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus.square.on.square" catalog="system" id="Kd2-Fx-Eca">
                             <color key="tintColor" systemColor="labelColor"/>
@@ -59,6 +62,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addNewItemTapped" destination="Kd2-Fx-Eca" id="hoZ-VH-CUg"/>
+                        <outlet property="deleteAllButton" destination="8zV-dX-ia5" id="Xli-2p-Lc4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jyu-Ec-Ncm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
