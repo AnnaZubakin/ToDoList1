@@ -10,6 +10,9 @@ import CoreData
 
 class ToDoTableViewController: UITableViewController {
 
+    @IBOutlet weak var addNewItemTapped: UIBarButtonItem!
+    
+    
     var managedObjectContext: NSManagedObjectContext?
 //    var toDos: [String] = []
     var toDoLists = [ToDo]()
@@ -33,25 +36,41 @@ class ToDoTableViewController: UITableViewController {
     
     @IBAction func addNewItemTapped(_ sender: Any) {
         
-        let alertController = UIAlertController(title: "Do To List", message: "Do you want to add new item?", preferredStyle: .alert)
-        alertController.addTextField { textFieldValue in
-            textFieldValue.placeholder = "Your title here..."
-            print(textFieldValue)
+        let alertController = UIAlertController(title: "To Do List", message: "Do you want to add new item?", preferredStyle: .alert)
+       
+        alertController.addTextField { titleTextField in
+            titleTextField.placeholder = "Your title here..."
         }
+        
+        alertController.addTextField { subtitleFieldValue in
+            subtitleFieldValue.placeholder = "Your subtitle here..."
+        }
+        
+      
         
 #warning("message/subtitle")
         
+       
+        
         let addActionButton = UIAlertAction(title: "Add", style: .default) { addActions in
-               let textField = alertController.textFields?.first
+          
+            
+           guard let titleTextField = alertController.textFields?.first?.text, !titleTextField.isEmpty else { return }
+               let subtitleTextField = alertController.textFields?[1].text ?? ""
                
                let entity = NSEntityDescription.entity(forEntityName: "ToDo", in: self.managedObjectContext!)
                let list = NSManagedObject(entity: entity!, insertInto: self.managedObjectContext)
                
-               list.setValue(textField?.text, forKey: "item")
+               list.setValue(titleTextField, forKey: "item")
+            if !subtitleTextField.isEmpty {
+                print("Subtitle before settings: \(subtitleTextField)")
+                list.setValue(subtitleTextField, forKey: "item2")
+                print("Subtitle after settings: \(list.setValue(subtitleTextField, forKey: "item2"))")
+            }
                self.saveCoreData()
-   //            self.toDos.append(textField!.text!)
-   //            self.tableView.reloadData()
+            
            }
+        
            
            let cancelActionButton = UIAlertAction(title: "Cancel", style: .destructive)
            
@@ -59,10 +78,10 @@ class ToDoTableViewController: UITableViewController {
            alertController.addAction(cancelActionButton)
            
            present(alertController, animated: true)
+        
+        
        }
        
-
-
 
 
    }
@@ -84,6 +103,7 @@ extension ToDoTableViewController {
     func saveCoreData(){
         do {
             try managedObjectContext?.save()
+            print("Data saved")
         } catch {
             fatalError("Error in saving item into core data")
         }
@@ -98,45 +118,48 @@ extension ToDoTableViewController {
 
 // MARK: - Table view data source
 extension ToDoTableViewController {
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return toDoLists.count
     }
     
-    
+ 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "toDoCell", for: indexPath)
-        
+
         let toDoList = toDoLists[indexPath.row]
         cell.textLabel?.text = toDoList.item
+        cell.detailTextLabel?.text = toDoList.item2
         cell.accessoryType = toDoList.completed ? .checkmark : .none
         return cell
     }
-    
+ 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         toDoLists[indexPath.row].completed = !toDoLists[indexPath.row].completed
         saveCoreData()
     }
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-         // Return false if you do not want the specified item to be editable.
-         return true
-     }
-     */
 
+    /*
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    */
+
+   
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            managedObjectContext?.delete(toDoLists[indexPath.row])
+        }
+        saveCoreData()
+    }
     
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-         if editingStyle == .delete {
-             // Delete the row from the data source
-             managedObjectContext?.delete(toDoLists[indexPath.row])
-         }
-         saveCoreData()
-     }
+
      
 
      /*
