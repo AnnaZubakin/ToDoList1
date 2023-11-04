@@ -59,9 +59,7 @@ class ToDoTableViewController: UITableViewController {
             
             list.setValue(titleTextField, forKey: "item")
             if !subtitleTextField.isEmpty {
-                print("Subtitle before settings: \(subtitleTextField)")
                 list.setValue(subtitleTextField, forKey: "item2")
-                print("Subtitle after settings: \(list.setValue(subtitleTextField, forKey: "item2"))")
             }
             self.saveCoreData()
             
@@ -86,6 +84,7 @@ class ToDoTableViewController: UITableViewController {
 }
 
    // MARK: - CoreData logic
+
 extension ToDoTableViewController {
     func loadCoreData(){
         let request: NSFetchRequest<ToDo> = ToDo.fetchRequest()
@@ -108,21 +107,6 @@ extension ToDoTableViewController {
         }
         loadCoreData()
     }
-    
-    /*   func deleteAllCoreData(){
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "ToDo")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do {
-            try managedObjectContext?.execute(deleteRequest)
-            try managedObjectContext?.save()
-        } catch {
-            print("Error deleting all items: \(error)")
-        }
-        
-        loadCoreData()
-    }
-    */
     
     
     func deleteAllCoreData() {
@@ -148,7 +132,7 @@ extension ToDoTableViewController {
         
         present(alertController, animated: true, completion: nil)
         
-    } 
+    }
     
     // MARK: - Table view data source
     
