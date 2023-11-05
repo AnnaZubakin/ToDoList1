@@ -13,6 +13,7 @@
 		BC00E2142AF02E7B005D3517 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC00E2132AF02E7B005D3517 /* Assets.xcassets */; };
 		BC00E2172AF02E7B005D3517 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC00E2152AF02E7B005D3517 /* LaunchScreen.storyboard */; };
 		BC00E2222AF271BD005D3517 /* ToDoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC00E2212AF271BD005D3517 /* ToDoTableViewController.swift */; };
+		BC00E2242AF7990D005D3517 /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC00E2232AF7990D005D3517 /* NewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		BC00E2162AF02E7B005D3517 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BC00E2182AF02E7B005D3517 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BC00E2212AF271BD005D3517 /* ToDoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTableViewController.swift; sourceTree = "<group>"; };
+		BC00E2232AF7990D005D3517 /* NewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				BC00E2212AF271BD005D3517 /* ToDoTableViewController.swift */,
+				BC00E2232AF7990D005D3517 /* NewViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 			files = (
 				BC00E2122AF02E78005D3517 /* ToDoList1.xcdatamodeld in Sources */,
 				BC00E2222AF271BD005D3517 /* ToDoTableViewController.swift in Sources */,
+				BC00E2242AF7990D005D3517 /* NewViewController.swift in Sources */,
 				BC00E2082AF02E78005D3517 /* AppDelegate.swift in Sources */,
 				BC00E20A2AF02E78005D3517 /* SceneDelegate.swift in Sources */,
 			);

@@ -25,6 +25,10 @@ class ToDoTableViewController: UITableViewController {
         loadCoreData()
         setupView()
         
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
+           tableView.rowHeight = UITableView.automaticDimension
+           tableView.estimatedRowHeight = 44
+           
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -74,6 +78,11 @@ class ToDoTableViewController: UITableViewController {
         
     }
     
+    @objc func openNewWindow() {
+        let newViewController = NewViewController()
+        self.navigationController?.pushViewController(newViewController, animated: true)
+    }
+    
     @objc func longPress(sender: UILongPressGestureRecognizer) {
         if sender.state == UIGestureRecognizer.State.began {
             let touchPath = sender.location(in: tableView)
@@ -109,7 +118,8 @@ class ToDoTableViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .label
         
-        
+        let openButton = UIBarButtonItem(title: "Open", style: .done, target: self, action: #selector(openNewWindow))
+          navigationItem.leftBarButtonItem = openButton
     }
     
  /*   @IBAction func addNewItemTapped(_ sender: Any) {
@@ -278,11 +288,16 @@ extension ToDoTableViewController {
         
         override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+    
             
             let toDoList = toDoLists[indexPath.row]
             cell.textLabel?.text = toDoList.item
             cell.detailTextLabel?.text = toDoList.item2
             cell.accessoryType = toDoList.completed ? .checkmark : .none
+            
+            cell.textLabel?.numberOfLines = 0
+            cell.detailTextLabel?.numberOfLines = 0
+            
             return cell
         }
         
