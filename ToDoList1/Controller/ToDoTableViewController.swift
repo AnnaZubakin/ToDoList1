@@ -287,8 +287,8 @@ extension ToDoTableViewController {
         
         
         override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-    
+         //   let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellID)
             
             let toDoList = toDoLists[indexPath.row]
             cell.textLabel?.text = toDoList.item
