@@ -11,6 +11,8 @@ class NewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.barTintColor = .black
+        navigationController?.navigationBar.tintColor = .white
       
         let backgroundImageView = UIImageView(image: UIImage(systemName: "star.fill"))
         
